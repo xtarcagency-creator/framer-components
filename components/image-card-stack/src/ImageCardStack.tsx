@@ -50,6 +50,10 @@ const DEFAULT_IMAGES: CardImage[] = [
     { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80", alt: "Desert dunes" },
 ]
 
+/**
+ * @framerSupportedLayoutWidth auto
+ * @framerSupportedLayoutHeight auto
+ */
 export default function ImageCardStack(props: Partial<ImageCardStackProps>) {
     const {
         images = DEFAULT_IMAGES,
@@ -277,6 +281,7 @@ addPropertyControls(ImageCardStack, {
     stackSpread: {
         type: ControlType.Number,
         title: "Stack Spread",
+        description: "How far the cards behind the top one fan out — offset, rotation, and scale all together.",
         min: 0,
         max: 2,
         step: 0.1,
