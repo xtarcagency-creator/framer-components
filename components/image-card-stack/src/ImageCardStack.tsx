@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState, useMemo, useCallback } from "react"
 import { motion, AnimatePresence, PanInfo } from "framer-motion"
-import { addPropertyControls, ControlType } from "framer"
+import { addPropertyControls, ControlType, useIsStaticRenderer } from "framer"
 
 /**
  * Draggable Image Card Stack
@@ -67,6 +67,11 @@ export default function ImageCardStack(props: Partial<ImageCardStackProps>) {
         onSwipe,
         onEmpty,
     } = props
+
+    // The Framer canvas and static exports never run interactions or
+    // continuous animation, so drag/spring/AnimatePresence are skipped
+    // there in favor of a plain, non-animated stack.
+    const isStatic = useIsStaticRenderer()
 
     const offsetX = BASE_OFFSET_X * stackSpread
     const offsetY = BASE_OFFSET_Y * stackSpread
@@ -146,14 +151,56 @@ export default function ImageCardStack(props: Partial<ImageCardStackProps>) {
         )
     }
 
+    const stackWidth = cardWidth + Math.abs(offsetX) * (visible.length - 1)
+    const stackHeight = cardHeight + Math.abs(offsetY) * (visible.length - 1)
+
+    if (isStatic) {
+        // Plain, non-animated fallback for the canvas and static exports:
+        // same visual arrangement, no drag/spring/AnimatePresence.
+        return (
+            <div style={{ position: "relative", width: stackWidth, height: stackHeight }}>
+                {visible
+                    .map((imgIndex, stackPos) => {
+                        const image = images[imgIndex]
+                        const depth = visible.length - 1 - stackPos
+                        const rotate = stackPos === 0 ? 0 : rotation * (stackPos % 2 === 0 ? 1 : -1) * stackPos
+                        const scale = 1 - scaleStep * stackPos
+
+                        return (
+                            <div
+                                key={imgIndex}
+                                style={{
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
+                                    width: cardWidth,
+                                    height: cardHeight,
+                                    borderRadius,
+                                    overflow: "hidden",
+                                    zIndex: depth,
+                                    transform: `translate(${offsetX * stackPos}px, ${offsetY * stackPos}px) rotate(${rotate}deg) scale(${scale})`,
+                                    boxShadow: shadow
+                                        ? `0 ${8 + depth * 2}px ${24 + depth * 4}px rgba(0,0,0,${0.18 - depth * 0.02})`
+                                        : "none",
+                                }}
+                            >
+                                {image?.src && (
+                                    <img
+                                        src={image.src}
+                                        alt={image.alt || ""}
+                                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                    />
+                                )}
+                            </div>
+                        )
+                    })
+                    .reverse()}
+            </div>
+        )
+    }
+
     return (
-        <div
-            style={{
-                position: "relative",
-                width: cardWidth + Math.abs(offsetX) * (visible.length - 1),
-                height: cardHeight + Math.abs(offsetY) * (visible.length - 1),
-            }}
-        >
+        <div style={{ position: "relative", width: stackWidth, height: stackHeight }}>
             <AnimatePresence>
                 {visible
                     .map((imgIndex, stackPos) => {

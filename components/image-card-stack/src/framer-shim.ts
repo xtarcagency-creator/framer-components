@@ -13,3 +13,8 @@ export const ControlType = {
 export function addPropertyControls(_component: unknown, _controls: unknown) {
     // no-op outside the Framer canvas
 }
+
+export function useIsStaticRenderer() {
+    // Local browser preview is always interactive.
+    return false
+}
