@@ -18,7 +18,7 @@ tested in a normal browser before it ever touches Framer.
 
 ```
 components/<name>/
-  src/<Name>.tsx      # the actual Framer Code Component — paste this into Framer as-is
+  src/<Name>.tsx      # the actual Framer Code Component, paste this into Framer as-is
   src/framer-shim.ts  # local stand-in for Framer's runtime "framer" module
   src/framer.d.ts     # ambient types for "framer" so tsc can check the component standalone
   src/main.tsx         # demo harness for local preview

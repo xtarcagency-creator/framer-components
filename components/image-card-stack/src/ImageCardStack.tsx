@@ -11,11 +11,11 @@ import { addPropertyControls, ControlType } from "framer"
  * stack (or disappears permanently, depending on `loop`).
  *
  * Only the knobs a buyer would actually reach for are exposed as property
- * controls — animation feel (spring, swipe threshold, drag elasticity) is
+ * controls. Animation feel (spring, swipe threshold, drag elasticity) is
  * pre-tuned internally so the component looks good with zero configuration.
  */
 
-// Pre-tuned animation feel — not exposed, so the component looks polished
+// Pre-tuned animation feel, not exposed, so the component looks polished
 // out of the box instead of needing manual tuning.
 const SWIPE_THRESHOLD = 120
 const DRAG_ELASTIC = 0.6
@@ -281,7 +281,7 @@ addPropertyControls(ImageCardStack, {
     stackSpread: {
         type: ControlType.Number,
         title: "Stack Spread",
-        description: "How far the cards behind the top one fan out — offset, rotation, and scale all together.",
+        description: "How far the cards behind the top one fan out: offset, rotation, and scale all together.",
         min: 0,
         max: 2,
         step: 0.1,
