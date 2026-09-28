@@ -4,17 +4,9 @@ import WipeReveal from "./WipeReveal"
 
 function App() {
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 40 }}>
-            <div style={{ height: "100vh", display: "flex", alignItems: "center", color: "#888" }}>
-                Scroll down
-            </div>
-            <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center" }}>
-                <WipeReveal direction="left" />
-                <WipeReveal direction="right" />
-                <WipeReveal direction="top" />
-                <WipeReveal direction="bottom" />
-            </div>
-            <div style={{ height: "100vh" }} />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, paddingTop: 80 }}>
+            <p style={{ color: "#888" }}>Press and drag across the panel to scratch it away</p>
+            <WipeReveal onReveal={() => console.log("revealed!")} />
         </div>
     )
 }

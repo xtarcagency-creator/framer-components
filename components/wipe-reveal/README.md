@@ -1,7 +1,8 @@
 # Wipe Reveal: Framer Code Component
 
-A solid-color panel covers your image until it scrolls into view, then
-wipes away in the direction you choose to reveal it.
+A solid-color panel covers your image. Press and drag across it (mouse,
+pen, or touch) to erase the panel along your path, like a scratch card,
+revealing the image underneath.
 
 ## Install into Framer
 
@@ -10,21 +11,19 @@ wipes away in the direction you choose to reveal it.
 3. Drag it onto the canvas and resize the frame like any other layer
    (it fills whatever size you give it). The property panel exposes:
    - **Image**
-   - **Direction** (From Left, From Right, From Top, From Bottom)
-   - **Duration**, **Delay**
-   - **Overlay Color** (the panel that wipes away)
+   - **Overlay Color** (the panel that gets scratched away)
+   - **Brush Size**
    - **Border Radius**
-   - **Replay** (wipe again every time it re-enters view, instead of only once)
-
-By default the reveal only ever plays once, the first time the component
-scrolls into view, which is what most buyers want for a hero image or a
-portfolio piece.
+   - **Reset Button** (shows a small button to repaint the panel so it
+     can be scratched again)
+4. Wire `onReveal()` to a Framer event or interaction if you want to
+   trigger something the first time a visitor starts scratching.
 
 ## Local preview (outside Framer)
 
 ```bash
 npm install
-npm run dev      # scroll down to trigger the reveal in a real browser
+npm run dev      # press and drag across the panel in a real browser
 npm run build    # typecheck + production build sanity check
 ```
 
@@ -34,7 +33,7 @@ file can be dev-tested locally and then pasted unmodified into Framer.
 
 ## Notes for marketplace packaging
 
-- No external dependencies beyond `framer-motion`, which Framer already bundles.
-- Declares `@framerSupportedLayoutWidth/Height: any-prefer-fixed` and spreads Framer's injected `style` prop, so resizing the frame on canvas actually resizes the component (unlike a fixed intrinsic size).
-- Uses `useIsStaticRenderer()` to skip the scroll-trigger and animated overlay entirely on the canvas and in exports, showing the image fully revealed instead.
+- No external dependencies beyond React (no `framer-motion`, it's a canvas-based effect, not a CSS animation).
+- Declares `@framerSupportedLayoutWidth/Height: any-prefer-fixed` and spreads Framer's injected `style` prop, so resizing the frame on canvas actually resizes the component.
+- Uses `useIsStaticRenderer()` to skip the canvas and pointer handling entirely on the canvas and in exports, showing the plain overlay color as a static fallback instead.
 - Good candidate to bundle with other interactive-image components (image card stack, tilt card, before/after slider) as an "Interactive Image Kit".

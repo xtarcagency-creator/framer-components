@@ -4,39 +4,42 @@
 Wipe Reveal
 
 ## Byline
-Reveal images as you scroll
+Scratch to reveal your image
 
 ## Description
 
-A solid panel covers your image until it scrolls into view, then wipes
-away to reveal it. Simple, cinematic, and it works with zero setup.
+A solid panel covers your image. Press and drag across it, like a
+scratch card, and it erases away along your path to reveal what's
+underneath. Works with mouse, pen, or touch.
 
 **What it does**
-- Triggers automatically the first time the component scrolls into view
-- Wipes away in any of 4 directions: from the left, right, top, or bottom
-- Optionally set to replay every time it re-enters the viewport, instead
-  of only once
+- Erases the overlay panel wherever you drag, following your exact path
+- A small reset button repaints the panel so visitors can scratch it
+  again
 - Fills whatever size you give it on canvas, just resize the frame like
   any other layer
 
 **Customize**
-- Direction of the wipe
-- Duration and delay
-- Overlay color (the panel that wipes away)
+- Overlay color (the panel that gets scratched away)
+- Brush size
 - Corner radius
+- Toggle the reset button on or off
+- Hook `onReveal()` into your own Framer interactions to trigger
+  something the moment a visitor starts scratching
 
-**Why it's different from a plain fade-in**
-A fade is subtle. A wipe is a moment, it reads as an intentional reveal
-rather than a loading state. Great for hero images, portfolio pieces, and
-section dividers where you want the first scroll to feel considered.
+**Why it's different from a hover or fade effect**
+This isn't passive, visitors have to actually do something to see what's
+underneath. That small bit of participation makes reveals like "before
+and after," hidden discounts, or a surprise product shot land harder
+than a fade ever will.
 
 No configuration required to look good. Just drop in your image.
 
 ## Suggested categories
 - Interactive
-- Scroll animation
 - Gallery / Media
+- E-commerce (promo reveals, before/after use case)
 
 ## Suggested price
-$15 (one-time), slightly below Image Card Stack since it's a simpler
-interaction; adjust once you see comparable listings' current pricing.
+$17 (one-time), in line with similar interactive image components;
+adjust once you see comparable listings' current pricing.

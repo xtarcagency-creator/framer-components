@@ -13,7 +13,7 @@ tested in a normal browser before it ever touches Framer.
 | Component | Description |
 |---|---|
 | [`image-card-stack`](components/image-card-stack) | Draggable, Tinder-style stack of image cards with swipe-to-dismiss, loop/no-loop modes, and a reset affordance when the deck empties. |
-| [`wipe-reveal`](components/wipe-reveal) | A solid-color panel that wipes away to reveal an image when it scrolls into view, in any of 4 directions. |
+| [`wipe-reveal`](components/wipe-reveal) | A solid-color panel over an image that scratches away wherever you press and drag, like a scratch card. |
 
 ## Adding a new component
 
