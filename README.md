@@ -13,6 +13,7 @@ tested in a normal browser before it ever touches Framer.
 | Component | Description |
 |---|---|
 | [`image-card-stack`](components/image-card-stack) | Draggable, Tinder-style stack of image cards with swipe-to-dismiss, loop/no-loop modes, and a reset affordance when the deck empties. |
+| [`wipe-reveal`](components/wipe-reveal) | A solid-color panel that wipes away to reveal an image when it scrolls into view, in any of 4 directions. |
 
 ## Adding a new component
 
@@ -31,4 +32,11 @@ Each component should:
   exposing every parameter.
 - Work as a plain React component outside Framer (no hard dependency on the
   Framer canvas beyond `addPropertyControls`/`ControlType`).
+- Call `useIsStaticRenderer()` and skip all animation/continuous effects when
+  it returns true, showing a plain styled fallback instead. Framer's
+  automated marketplace review flags components that skip this.
+- Declare `@framerSupportedLayoutWidth`/`@framerSupportedLayoutHeight`
+  (`auto` if the component sizes itself from content, `any-prefer-fixed` if
+  it should fill whatever frame size the buyer drags on canvas) so resizing
+  the frame does what it visually implies.
 - Ship with a README covering install steps and what's configurable.
